@@ -1,0 +1,19 @@
+{{/* This command will allow you give a restrictive role to some for a set period of time.  
+
+In addition to this command, you will need to add this role to a Automoderator v2 rule restricting users with the role to whatever you want.
+*/}}
+
+{{/* Configuration values start:*/}}
+{{$warnmessage := "Message"}} {{/* Please enter the message you want to warn the user with*/}}
+{{$responsemessage := "Message"}} {{/* Please enter the response you want the bot to have to indicate the role has been added*/}}
+{{$time := "5"}} {{/* this is in seconds*/}}
+{{$roleid := 803686089277177866}} {{/* This is the ID of the restrictive role/}}
+{{/* Configuration values end*/}}
+
+{{ sendMessage nil $responsemessage }}
+{{$args := parseArgs 1 ""
+(carg "userid" "userid")}}
+{{$user := ($args.Get 0)}}
+{{giveRoleID $user $roleid}}
+{{takeRoleID $user $roleid $time}}
+{{$x := execAdmin "warn" $user $warnmessage}}

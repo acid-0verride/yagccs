@@ -1,15 +1,20 @@
-{{/*The only variables to change here is the $channel id and the embed info (change it to your server)
+{{/*This CC will send all attachments to a logging channel.
 
 Trigger type: Regex
 Trigger: (blank)
 
 */}}
 
-{{$avatar := (joinStr "" "https://cdn.discordapp.com/avatars/" (toString .User.ID) "/" .User.Avatar ".png")}}
- 
-{{if .Message.Attachments}}
+{{/* Configuration values start:*/}}
 {{$channel := "706337149498294282"}}
+{{$embedcolor := "78696"}}
+{{$servername := "XYZ Chat"}}
+{{$servericon := "www.what.com"}}
+{{/* Configuration values end*/}}
+
+{{$avatar := (joinStr "" "https://cdn.discordapp.com/avatars/" (toString .User.ID) "/" .User.Avatar ".png")}}
+{{if .Message.Attachments}}
 {{$image := (index .Message.Attachments 0).URL}}
-{{$embed := cembed "image" (sdict "url" $image) "title" (joinStr "" " Sent by " .User.Username " in #" .Channel.Name) "color" 78696 "fields" (cslice (sdict "name" "User ID" "value" (toString .User.ID) "inline" true)) "author" (sdict "name" "NFL Chat" "icon_url" "https://cdn.discordapp.com/attachments/381906080936230912/589944426152067082/national_football_league_logo.png") "thumbnail" (sdict "url" $avatar) "footer" (sdict "text" "NFL Chat" "icon_url" "https://cdn.discordapp.com/attachments/381906080936230912/589944426152067082/national_football_league_logo.png") "timestamp"  currentTime}}
+{{$embed := cembed "image" (sdict "url" $image) "title" (joinStr "" " Sent by " .User.Username " in #" .Channel.Name) "color" $embedcolor "fields" (cslice (sdict "name" "User ID" "value" (toString .User.ID) "inline" true)) "author" (sdict "name" $servername "icon_url" $servericon) "timestamp"  currentTime}}
 {{$a := sendMessageRetID $channel $embed}}
 {{end}}

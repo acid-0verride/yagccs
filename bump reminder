@@ -1,16 +1,21 @@
-{{/*there is one variable to change.. the id of the role you want to ping after 2 hours
+{{/*
 
 Trigger type: Regex
 Trigger: \A!d\sbump(?:\s+|\z)
 
 */}}
 
+{{/* Configuration values start:*/}}
+{{$roleid := 715733414812188712 }} {{/* change this to the role you want to ping*/}}
+{{/* Configuration values end*/}}
+
+
 {{addReactions "👍"}}
 {{if .ExecData}}
  {{/* after delay */}}
-{{mentionRoleID 792872094726750208}}
- {{sendMessage nil "You may now bump DISBOARD `!d bump`"}}
+{{mentionRoleID $roleid}}
+{{sendMessage nil "You may now bump DISBOARD `!d bump`"}}
 {{else}}
  {{/* before delay */}}
- {{execCC .CCID nil 7200 "to bump has been set."}}
+{{execCC .CCID nil 7200 "The reminder has been set."}}
 {{end}}
