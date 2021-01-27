@@ -1,4 +1,4 @@
-{{/*
+{{/* This command will send a message 2 hours after you !d bump. The message will ping a role.
 
 Trigger type: Regex
 Trigger: \A!d\sbump(?:\s+|\z)
